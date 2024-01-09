@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="produto-detail">
+        <h1>Detalhes do Produto: {{ produto.nome }}</h1>
+        <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}">
+        <p>Descrição: {{ produto.descricao }}</p>
+        <p>Preço: R$ {{ produto.preco }}</p>
+
+        <!-- Verificar se o usuário é um superusuário -->
+        {% if request.user.is_superuser %}
+            <a href="{% url 'produto_update' produto.pk %}">Editar</a>
+            <a href="{% url 'produto_delete' produto.pk %}">Excluir</a>
+        {% endif %}
+    </div>
+{% endblock %}
+
